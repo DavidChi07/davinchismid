@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const app = express();
 
 const productosRoutes = require('./routes/productos.routes');
@@ -8,35 +9,28 @@ const ordenRoutes = require('./routes/orden.routes');
 
 app.use(express.json());
 
-// Rutas API
 app.use('/api/auth',      authRoutes);
 app.use('/api/productos', productosRoutes);
 app.use('/api/ordenes',   ordenRoutes);
 
-// Servir frontend compilado en producción
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../public')));
+const publicPath = path.join(__dirname, '../public');
+const indexPath  = path.join(publicPath, 'index.html');
 
-  // Cualquier ruta que no sea /api redirige al index.html de React
+if (process.env.NODE_ENV === 'production' && fs.existsSync(indexPath)) {
+  app.use(express.static(publicPath));
   app.get('/{*path}', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public', 'index.html'));
+    res.sendFile(indexPath);
   });
 } else {
   app.get('/', (req, res) => {
     res.json({
       tienda: 'DavinchisMid',
       descripcion: 'Auténtica comida yucateca',
-      status: 'funcionando',
-      endpoints: {
-        auth: '/api/auth',
-        productos: '/api/productos',
-        ordenes: '/api/ordenes'
-      }
+      status: 'funcionando'
     });
   });
 }
 
-// Middleware de errores global
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: 'Error interno del servidor' });
