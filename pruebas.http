@@ -1,0 +1,32 @@
+### Crear una orden (necesita token)
+POST http://localhost:3000/api/ordenes
+Authorization: Bearer TU_TOKEN_AQUI
+Content-Type: application/json
+
+{
+  "items": [
+    { "productoId": 1, "cantidad": 2 },
+    { "productoId": 3, "cantidad": 1 }
+  ]
+}
+
+### Ver mis órdenes
+GET http://localhost:3000/api/ordenes
+Authorization: Bearer TU_TOKEN_AQUI
+
+### Ver detalle de una orden
+GET http://localhost:3000/api/ordenes/1
+Authorization: Bearer TU_TOKEN_AQUI
+
+### Actualizar status (solo admin)
+PUT http://localhost:3000/api/ordenes/1/status
+Authorization: Bearer TU_TOKEN_AQUI
+Content-Type: application/json
+
+{
+  "status": "confirmada"
+}
+
+### Ver todas las órdenes (solo admin)
+GET http://localhost:3000/api/ordenes/todas
+Authorization: Bearer TU_TOKEN_AQUI
