@@ -9,6 +9,11 @@ const ordenRoutes = require('./routes/orden.routes');
 
 app.use(express.json());
 
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('publicPath:', publicPath);
+console.log('indexPath existe:', fs.existsSync(indexPath));
+console.log('Archivos en /app:', require('fs').readdirSync('/app').join(', '));
+
 app.use('/api/auth',      authRoutes);
 app.use('/api/productos', productosRoutes);
 app.use('/api/ordenes',   ordenRoutes);
