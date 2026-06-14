@@ -1,40 +1,25 @@
 const express = require('express');
-const path = require('path');
-const fs = require('fs');
+const cors = require('cors');
 const app = express();
 
 const productosRoutes = require('./routes/productos.routes');
 const authRoutes = require('./routes/auth.routes');
 const ordenRoutes = require('./routes/orden.routes');
 
+app.use(cors());
 app.use(express.json());
-
-console.log('NODE_ENV:', process.env.NODE_ENV);
-console.log('publicPath:', publicPath);
-console.log('indexPath existe:', fs.existsSync(indexPath));
-console.log('Archivos en /app:', require('fs').readdirSync('/app').join(', '));
 
 app.use('/api/auth',      authRoutes);
 app.use('/api/productos', productosRoutes);
 app.use('/api/ordenes',   ordenRoutes);
 
-const publicPath = path.join(__dirname, '../public');
-const indexPath  = path.join(publicPath, 'index.html');
-
-if (process.env.NODE_ENV === 'production' && fs.existsSync(indexPath)) {
-  app.use(express.static(publicPath));
-  app.get('/{*path}', (req, res) => {
-    res.sendFile(indexPath);
+app.get('/', (req, res) => {
+  res.json({
+    tienda: 'DavinchisMid',
+    descripcion: 'Auténtica comida yucateca',
+    status: 'funcionando'
   });
-} else {
-  app.get('/', (req, res) => {
-    res.json({
-      tienda: 'DavinchisMid',
-      descripcion: 'Auténtica comida yucateca',
-      status: 'funcionando'
-    });
-  });
-}
+});
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

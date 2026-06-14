@@ -7,9 +7,7 @@
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
     "seed": "node prisma/seed.js",
-    "postinstall": "npx prisma generate",
-    "build": "npx prisma generate && npm install --prefix client && npm run build --prefix client",
-    "dev:full": "concurrently \"npm run dev\" \"npm run dev --prefix client\"",
+    "build": "npx prisma generate && npx prisma migrate deploy",
     "test": "jest --runInBand",
     "test:watch": "jest --watchAll --runInBand"
   },
@@ -29,6 +27,7 @@
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
