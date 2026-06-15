@@ -5,8 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   build: {
-    outDir: '../public',  // compila a /public en el backend
-    emptyOutDir: true
+    outDir: 'dist'  // Vercel espera dist
   },
   server: {
     proxy: {
