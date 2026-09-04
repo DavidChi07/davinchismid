@@ -1,6 +1,15 @@
+### Login (obtener token)
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "correo_de_un_usuario_normal@ejemplo.com",
+  "password": "su_contraseña"
+}
+
 ### Crear una orden (necesita token)
 POST http://localhost:3000/api/ordenes
-Authorization: Bearer TU_TOKEN_AQUI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjbGllbnRlQHBydWViYS5jb20iLCJyb2wiOiJjbGllbnRlIiwiaWF0IjoxNzg3NzgxNjI1LCJleHAiOjE3ODc4NjgwMjV9.3SlxbwkdJdErNDMkIpJP9vpWjqsqCHY_jS2mOr6seb8
 Content-Type: application/json
 
 {
@@ -12,7 +21,7 @@ Content-Type: application/json
 
 ### Ver mis órdenes
 GET http://localhost:3000/api/ordenes
-Authorization: Bearer TU_TOKEN_AQUI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjbGllbnRlQHBydWViYS5jb20iLCJyb2wiOiJjbGllbnRlIiwiaWF0IjoxNzg3NzgxNjI1LCJleHAiOjE3ODc4NjgwMjV9.3SlxbwkdJdErNDMkIpJP9vpWjqsqCHY_jS2mOr6seb8
 
 ### Ver detalle de una orden
 GET http://localhost:3000/api/ordenes/1
@@ -30,3 +39,13 @@ Content-Type: application/json
 ### Ver todas las órdenes (solo admin)
 GET http://localhost:3000/api/ordenes/todas
 Authorization: Bearer TU_TOKEN_AQUI
+
+### Registro (crear usuario normal)
+POST http://localhost:3000/api/auth/registro
+Content-Type: application/json
+
+{
+  "nombre": "Cliente Test Creación de Pedidos",
+  "email": "cliente@prueba.com",
+  "password": "123456"
+}
