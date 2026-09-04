@@ -104,3 +104,8 @@ ese script es para CI/deploy, no para uso local (en local usa `migrate dev`).
   `VITE_API_URL` en `client/.env` sea el correcto.
 - Actualiza este README cada vez que cambies algo del setup — es la fuente de
   verdad, no la memoria.
+
+## Usuario Admin
+
+- email: wason_crazy_@hotmail.com
+- password: 123456
